@@ -1,13 +1,11 @@
 from joblib import load
 import numpy as np
 import pandas as pd
-from xgboost import plot_importance,plot_tree
+from xgboost import plot_tree
 import matplotlib.pyplot as pt
-import os
 
 
 
-#os.environ["PATH"] += os.pathsep + r"C:\Program Files\Graphviz\bin"
 
 doctor = load('Doctor.joblib')
 label_encoder = load('Encoder.joblib')
@@ -28,15 +26,9 @@ inp_mask = check("fatigue", "weight_loss", "lethargy","high_fever", "sweating", 
 report = doctor.predict(inp_mask)
 print(label_encoder.inverse_transform(report))
 
-# plot_importance(doctor,importance_type='weight',max_num_features=10)
-
-# pt.show()
 
 
-
-import xgboost as xgb
-
-xgb.plot_tree(doctor, num_trees=0)
+plot_tree(doctor, num_trees=0)
 
 pt.title('Tree Visualization')
 pt.show()
