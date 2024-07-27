@@ -9,8 +9,12 @@ from joblib import dump
 
 
 
+
+
 label_encoder = LabelEncoder()
 numericOp = label_encoder.fit_transform(dt.op.values.ravel())
+
+
 
 X,x,Y,y = train_test_split(dt.ip,numericOp,test_size=0.2,random_state=35)
 DataSet = (X,x,Y,y)
@@ -20,7 +24,6 @@ doctor.fit(X,Y)
 
 numericReport = doctor.predict(x)
 print(accuracy_score(y.ravel(),numericReport)*100,"%")
-
 
 #packing model,encoder and the dataset
 dump(doctor,'Doctor.joblib')
